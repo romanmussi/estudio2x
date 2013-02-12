@@ -1,0 +1,1 @@
+path=c:\xampp\php;c:\xampp\htdocs\estudio22v1\lib\cake\console

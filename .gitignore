@@ -1,0 +1,8 @@
+/app/tmp
+/lib/Cake/Console/Templates/skel/tmp/
+/build
+/dist
+.DS_Store
+/tags
+/nbproject/
+/app/Config/database.php
