@@ -22,7 +22,7 @@
     <head>
         <?php echo $this->Html->charset(); ?>
         <title>
-            <?php echo 'Estudio 2.2.x - Versión 1' ?>:
+            <?php echo 'Estudio CakePHP 2.x' ?>:
             <?php echo $title_for_layout; ?>
         </title>
         <?php
@@ -45,7 +45,7 @@
     <body>
         <div id="container01">
             <div id="header01">
-                <h1><?php echo 'Estudio 2.2.x - Versión 1' ?></h1>
+                <h1><?php echo 'Estudio CakePHP 2.x' ?></h1>
             </div>
             <div id="usuario01">
                 <?php
