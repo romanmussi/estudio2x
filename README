@@ -1,29 +1,24 @@
--------------------------
-Notas sobre configuración
--------------------------
+NOTAS SOBRE CONFIGURACION
+=========================
 
-=========================================================================================================
 TECNOLOGIAS UTILIZADAS
-=========================================================================================================
+======================
 CakePHP 2.x
 Base de datos PostgreSQL
 
-=========================================================================================================
 REQUERIMIENTOS
-=========================================================================================================
+==============
 HTTP Server. Apache con mod_rewrite activado
 
-=========================================================================================================
 ENCODINGS
-=========================================================================================================
+=========
 Tanto los archivos como la base de datos tienen encoding UTF8
 
-=========================================================================================================
 INSTALACION
-=========================================================================================================
+===========
 1. Clonar repositorio git en /htdocs
 2. Crear base de datos en PostgreSQL
 3. Crear en directorio app/config/ archivo database.php con configuración de conexión 
-4. Copiar /tmp de lib/Cake/Console/Templates/skel a /app
+4. Copiar lib/Cake/Console/Templates/skel/tmp... a /app
 5. Dar permisos de escritura a directorio /app/tmp/
 
