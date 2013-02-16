@@ -21,4 +21,3 @@ INSTALACION
 3. Crear en directorio app/config/ archivo database.php con configuración de conexión 
 4. Copiar lib/Cake/Console/Templates/skel/tmp... a /app
 5. Dar permisos de escritura a directorio /app/tmp/
-
