@@ -1,4 +1,4 @@
-<?php //;           ?>
+<?php //;            ?>
 <script>
     $(document).ready(function() {
         //Muestra mensaje de error si falla llamada ajax en tabs
@@ -146,16 +146,16 @@ Cargue nuevamente la página; si el problema persiste informe al programador."
             );
             }
         });
-        //Define onchange > Carga departamentos
+        //Define onchange de jurisdicciones > Carga departamentos
         $("#cmb_jurisdicciones").on("change", function() {
             $.ajax({
                 dataType:"json",
-                url:"../localidades/lista_departamentos",
-                data:{jurisdiccion_id: $(this).val()},
-//                url:"../localidades/lista_departamentos/"+$(this).val(),
-//                data:{jurisdiccion_id: $(this).val()},
-//                data: {jurisdiccion_id: $("#cmb_jurisdicciones").val()},
-              success:function (data, textStatus) {
+                //si uso data cake levanta el dato en query (como querystring)
+                //y hay que hacer algo como para pasarlo a parametro
+                //si lo ponemos en la url directo cake lo recibe como parametro tipo pass
+                url:"../localidades/lista_departamentos/"+$(this).val(),
+                data: "",
+                success:function (data, textStatus) {
                     var options = '<option value="">Seleccione un Departamento...</option>';
                     $.each(data, function(i, option_name) {
                         options += '<option value="' + i + '">' + option_name + '</option>';
@@ -170,7 +170,31 @@ Cargue nuevamente la página; si el problema persiste informe al programador."
                 }
             });
         });
-    });
+        //Define onchange de departamentos > Carga localidades
+        $("#cmb_departamentos").on("change", function() {
+            $.ajax({
+                dataType:"json",
+                //si uso data cake levanta el dato en query (como querystring)
+                //y hay que hacer algo como para pasarlo a parametro
+                //si lo ponemos en la url directo cake lo recibe como parametro tipo pass
+                url:"../localidades/lista_localidades/"+$(this).val(),
+                data: "",
+                success:function (data, textStatus) {
+                    var options = '<option value="">Seleccione una Localidad...</option>';
+                    $.each(data, function(i, option_name) {
+                        options += '<option value="' + i + '">' + option_name + '</option>';
+                    });
+                    $("#cmb_localidades").html(options);
+                },
+                error: function () {
+                    alert(
+                    "Atención!! No se pudo recuperar información importante. \n\
+Cargue nuevamente la página; si el problema persiste informe al programador."
+                );
+                }
+            });
+        });
+});
 </script>
 
 <div id="view1col">
@@ -208,13 +232,20 @@ Cargue nuevamente la página; si el problema persiste informe al programador."
 <p><a id="select_carga_ddeajax" href="#">Carga el select desde ajax - listado de localidades</a></p>
 <p><a id="select_selecciona18" href="#">Selecciona opcion 18 Dieciocho / Corrientes</a></p>
 <p><a id="select_val" href="#">Muestra el valor seleccionado</a></p>
-<h4>Combos relacionados - Jurisdicciones -> Departamentos</h4>
-<p><select id="cmb_jurisdicciones" name="jurisdiccion_id">
+<h4>Combos relacionados - Jurisdicciones -> Departamentos -> Localidades</h4>
+<p>
+    <select id="cmb_jurisdicciones" name="jurisdiccion_id">
         <option value="">Seleccione una Jurisdicción...</option>
     </select>
 </p>
-<p><select id="cmb_departamentos" name="departamento_id">
+<p>
+    <select id="cmb_departamentos" name="departamento_id">
         <option value="">Debe seleccionar primero una Jurisdicción...</option>
+    </select>
+</p>
+<p>
+    <select id="cmb_localidades" name="localidad_id">
+        <option value="">Debe seleccionar primero un Departamento...</option>
     </select>
 </p>
 </div>

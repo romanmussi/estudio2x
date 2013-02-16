@@ -76,16 +76,21 @@ class LocalidadesController extends AppController {
     }
 
     public function lista_departamentos($jurisdiccion_id = null) {
-        $this->log($this->request, 'debug');
-        $this->log($this->request->pass, 'debug');
-        $this->log($this->request->named, 'debug');
-        $this->log($this->request->query, 'debug');
-//        $this->log($this->request->query['jurisdiccion_id'], 'debug');
+//        $this->log($this->request, 'debug');
+//        $this->log($this->request->pass, 'debug');
+//        $this->log($this->request->named, 'debug');
+//        $this->log($this->request->query, 'debug');
         //obtener departamentos de una jurisdiccion
         $departamentos = $this->Localidad->Departamento->find('list', array('conditions' => array('Departamento.jurisdiccion_id' => $jurisdiccion_id)));
         $this->set('departamentos', $departamentos);
     }
 
+    public function lista_localidades($departamento_id = null) {
+        //obtener localidades de un departamento
+        $localidades = $this->Localidad->find('list', array('conditions' => array('Localidad.departamento_id' => $departamento_id)));
+        $this->set('localidades', $localidades);
+    }
+    
     /**
      * edit method
      *

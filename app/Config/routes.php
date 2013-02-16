@@ -43,5 +43,5 @@
  */
 	require CAKE . 'Config' . DS . 'routes.php';
 
-// Prueba, para json
+// Para que funcione json
         Router::parseExtensions('json'); 
