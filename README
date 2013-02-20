@@ -3,8 +3,9 @@ NOTAS SOBRE CONFIGURACION
 
 TECNOLOGIAS UTILIZADAS
 ======================
+PHP ...
 CakePHP 2.x
-Base de datos PostgreSQL
+Base de datos PostgreSQL 9.1 (funciona también con 8.4)
 
 REQUERIMIENTOS
 ==============
@@ -16,8 +17,9 @@ Tanto los archivos como la base de datos tienen encoding UTF8
 
 INSTALACION
 ===========
-1. Clonar repositorio git en /htdocs
-2. Crear base de datos en PostgreSQL
-3. Crear en directorio app/config/ archivo database.php con configuración de conexión 
-4. Copiar lib/Cake/Console/Templates/skel/tmp... a /app
-5. Dar permisos de escritura a directorio /app/tmp/
+1. Clonar repositorio git en /htdocs.
+2. Crear base de datos en PostgreSQL (usar REGETP, última versión, crear como REGISTRO).
+3. En tabla users agregar campo group_id int. Set romanmussi = 3 (administrador), romantest = 1 (invitado).
+4. Crear en directorio app/config/ archivo database.php con configuración de conexión.
+5. Copiar lib/Cake/Console/Templates/skel/tmp... a /app.
+6. Dar permisos de escritura a directorio /app/tmp/.
