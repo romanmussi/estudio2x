@@ -3,7 +3,7 @@ NOTAS SOBRE CONFIGURACION
 
 TECNOLOGIAS UTILIZADAS
 ======================
-PHP ...
+PHP 5.4
 CakePHP 2.x
 Base de datos PostgreSQL 9.1 (funciona también con 8.4)
 
@@ -23,3 +23,10 @@ INSTALACION
 4. Crear en directorio app/config/ archivo database.php con configuración de conexión.
 5. Copiar lib/Cake/Console/Templates/skel/tmp... a /app.
 6. Dar permisos de escritura a directorio /app/tmp/.
+
+PLATAFORMAS
+===========
+Probado con
+1. BitNami LAPP Stack 5.4.12
+2. WAMPP 1.8.1 / PostgreSQL 8.4 ó 9.1
+
