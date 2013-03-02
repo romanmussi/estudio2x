@@ -84,6 +84,10 @@
             return false;
         });
         //Pruebas con select
+        //Probando evento deprecado, live, migrate muestra warning en consola, ok
+//        $("#cmb_select").live("change", function() {
+//            alert($("#cmb_select").val());
+//        });
         $("#cmb_select").on("change", function() {
             alert($("#cmb_select").val());
         });
