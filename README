@@ -7,7 +7,7 @@ PHP 5.4
 CakePHP 2.x
 Base de datos PostgreSQL 9.1 (funciona también con 8.4)
 jQuery 1.9.1
-jQuery UI 1.10.1
+jQuery UI 1.10.1 Theme Redmond modificado
 
 REQUERIMIENTOS
 ==============
