@@ -1,18 +1,8 @@
-<?php
-// crear jquery script para publicar en header
-//$this->start('myscript');
-//echo 
-//'<script>
-//$(function() {
-//        $( "#tabs" ).tabs();
-//});
-//</script>';
-//$this->end();
-?>
+<?php ?>
 <script>
     $(document).ready(function() {
         $( "#tabs" ).tabs();
-        $( "#accordion" ).accordion({ autoHeight: false });
+        $( "#accordion" ).accordion({ heightStyle: "content" });
         $( "#dialog-modal-01" ).dialog({
             autoOpen: false,
             height: 140,
