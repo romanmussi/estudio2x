@@ -32,9 +32,10 @@
 //        echo $this->Html->script('jquery-ui-1.8.22.custom.min');
 //        echo $this->Html->css('jquery-ui-1.8.22.custom');
         echo $this->Html->script('jquery-1.9.1');
+        echo $this->Html->script('jquery-migrate-1.1.1');
         echo $this->Html->script('jquery-ui-1.10.1.custom.min');
         echo $this->Html->css('jquery-ui-1.10.1.custom');
-
+    
         echo $this->Html->css('cake.generic');
         echo $this->Html->css('app.local');
         echo $this->Html->css('menu.dropdown');
