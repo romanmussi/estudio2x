@@ -1,83 +1,83 @@
-<?php //;            ?>
+<?php //;             ?>
 <script>
     $(document).ready(function() {
         //Muestra mensaje de error si falla llamada ajax en tabs
-        $( "#tabs" ).tabs({
-            ajaxOptions: {
-                error: function( xhr, status, index, anchor ) {
-                    $( anchor.hash ).html(
-                    '<div id="flashMessage" class="message">No se pudo cargar la página, informe al programador.</div>');
-                }
+        $("#tabs").tabs({
+            beforeLoad: function(event, ui) {
+                ui.jqXHR.error(function() {
+                    ui.panel.html(
+                            '<div id="flashMessage" class="message">No se pudo cargar la página, informe al programador.</div>');
+                });
             }
         });
         //Pruebas con div
-        $( "#mostrar" ).click(function() {
-            $( "#divtest" ).show();
+        $("#mostrar").click(function() {
+            $("#divtest").show();
             return false;
         });
-        $( "#ocultar" ).click(function() {
-            $( "#divtest" ).hide();
+        $("#ocultar").click(function() {
+            $("#divtest").hide();
             return false;
         });
-        $( "#cargar1" ).click(function() {
-            $( "#divtest" ).html("Texto cargado mediante jquery.");
+        $("#cargar1").click(function() {
+            $("#divtest").html("Texto cargado mediante jquery.");
             return false;
         });
-        $( "#cargar2" ).click(function() {
-            $( "#divtest" ).html($("#texto1").val());
+        $("#cargar2").click(function() {
+            $("#divtest").html($("#texto1").val());
             return false;
         });
-        $( "#limpiar" ).click(function() {
-            $( "#divtest" ).hide("Texto");
+        $("#limpiar").click(function() {
+            $("#divtest").hide("Texto");
             return false;
         });
-        $( "#cargartab1" ).click(function() {
+        $("#cargartab1").click(function() {
             $.ajax({
-                dataType:"html",
-                url:"tab1ajax",
-                success:function (data, textStatus) {
+                dataType: "html",
+                url: "tab1ajax",
+                success: function(data, textStatus) {
                     $("#divtest").html(data);
                 },
-                error: function () {
+                error: function() {
                     $("#divtest").html('<div id="flashMessage" class="message">No se pudo cargar la página, informe al programador.</div>')
                 }
             });
             return false;
         });
-        $( "#cargartab2" ).click(function() {
+        $("#cargartab2").click(function() {
             $.ajax({
-                dataType:"html",
-                url:"tab2ajax",
-                success:function (data, textStatus) {
+                dataType: "html",
+                url: "tab2ajax",
+                success: function(data, textStatus) {
                     $("#divtest").html(data);
                 },
-                error: function () {
+                error: function() {
                     $("#divtest").html('<div id="flashMessage" class="message">No se pudo cargar la página, informe al programador.</div>')
                 }
             });
             return false;
         });
-        $( "#cargartab3" ).click(function() {
+        $("#cargartab3").click(function() {
             $.ajax({
-                dataType:"html",
-                url:"tab3ajax",
-                success:function (data, textStatus) {
+                dataType: "html",
+                url: "tab3ajax",
+                success: function(data, textStatus) {
                     $("#divtest").html(data);
                 },
-                error: function () {
+                error: function() {
                     $("#divtest").html('<div id="flashMessage" class="message">No se pudo cargar la página, informe al programador.</div>')
                 }
             });
             return false;
         });
-        $( "#cargardivddeajax" ).click(function() {
+        $("#cargardivddeajax").click(function() {
             $.ajax({
-                dataType:"html",
-                url:"../localidades/lista_jurisdicciones",
-                success:function (data, textStatus) {
+                dataType: "html",
+                url: "../localidades/lista_jurisdicciones",
+                success: function(data, textStatus) {
                     $("#divtest").html(data);
                 },
-                error: function () {
+                error: function() {
                     $("#divtest").html('<div id="flashMessage" class="message">No se pudo cargar la página, informe al programador.</div>')
                 }
             });
@@ -91,7 +91,7 @@
         $("#cmb_select").on("change", function() {
             alert($("#cmb_select").val());
         });
-        $( "#select_carga" ).click(function() {
+        $("#select_carga").click(function() {
             var opts = '<option value="">Seleccione una opción...</option>';
             opts += '<option value="05">Cinco</option>';
             opts += '<option value="10">Diez</option>';
@@ -100,105 +100,105 @@
             $('#cmb_select').html(opts);
             return false;
         });
-        $( "#select_carga_ddeajax" ).click(function() {
+        $("#select_carga_ddeajax").click(function() {
             $.ajax({
-                dataType:"json",
-                url:"../localidades/lista_jurisdicciones",
+                dataType: "json",
+                url: "../localidades/lista_jurisdicciones",
                 data: "",
-                success:function (data, textStatus) {
+                success: function(data, textStatus) {
                     var options = '<option value="">Seleccione una Jurisdicción...</option>';
                     $.each(data, function(i, option_name) {
                         options += '<option value="' + i + '">' + option_name + '</option>';
                     });
                     $("#cmb_select").html(options);
                 },
-                error: function () {
+                error: function() {
                     alert(
-                    "Atención!! No se pudo recuperar información importante. \n\
+                            "Atención!! No se pudo recuperar información importante. \n\
 Cargue nuevamente la página; si el problema persiste informe al programador."
-                );
+                            );
                 }
             });
             return false;
         });
-        $( "#select_selecciona18" ).click(function() {
+        $("#select_selecciona18").click(function() {
             $("#cmb_select").val("18");
             return false;
         });
         //muestra valor
-        $( "#select_val" ).click(function() {
+        $("#select_val").click(function() {
             alert($("#cmb_select").val());
             return false;
         });
         //Combos relacionados
         //Carga jurisdicciones
         $.ajax({
-            dataType:"json",
-            url:"../localidades/lista_jurisdicciones",
+            dataType: "json",
+            url: "../localidades/lista_jurisdicciones",
             data: "",
-            success:function (data, textStatus) {
+            success: function(data, textStatus) {
                 var options = '<option value="">Seleccione una Jurisdicción...</option>';
                 $.each(data, function(i, option_name) {
                     options += '<option value="' + i + '">' + option_name + '</option>';
                 });
                 $("#cmb_jurisdicciones").html(options);
             },
-            error: function () {
+            error: function() {
                 alert(
-                "Atención!! No se pudo recuperar información importante. \n\
+                        "Atención!! No se pudo recuperar información importante. \n\
 Cargue nuevamente la página; si el problema persiste informe al programador."
-            );
+                        );
             }
         });
         //Define onchange de jurisdicciones > Carga departamentos
         $("#cmb_jurisdicciones").on("change", function() {
             $.ajax({
-                dataType:"json",
+                dataType: "json",
                 //si uso data cake levanta el dato en query (como querystring)
                 //y hay que hacer algo como para pasarlo a parametro
                 //si lo ponemos en la url directo cake lo recibe como parametro tipo pass
-                url:"../localidades/lista_departamentos/"+$(this).val(),
+                url: "../localidades/lista_departamentos/" + $(this).val(),
                 data: "",
-                success:function (data, textStatus) {
+                success: function(data, textStatus) {
                     var options = '<option value="">Seleccione un Departamento...</option>';
                     $.each(data, function(i, option_name) {
                         options += '<option value="' + i + '">' + option_name + '</option>';
                     });
                     $("#cmb_departamentos").html(options);
                 },
-                error: function () {
+                error: function() {
                     alert(
-                    "Atención!! No se pudo recuperar información importante. \n\
+                            "Atención!! No se pudo recuperar información importante. \n\
 Cargue nuevamente la página; si el problema persiste informe al programador."
-                );
+                            );
                 }
             });
         });
         //Define onchange de departamentos > Carga localidades
         $("#cmb_departamentos").on("change", function() {
             $.ajax({
-                dataType:"json",
+                dataType: "json",
                 //si uso data cake levanta el dato en query (como querystring)
                 //y hay que hacer algo como para pasarlo a parametro
                 //si lo ponemos en la url directo cake lo recibe como parametro tipo pass
-                url:"../localidades/lista_localidades/"+$(this).val(),
+                url: "../localidades/lista_localidades/" + $(this).val(),
                 data: "",
-                success:function (data, textStatus) {
+                success: function(data, textStatus) {
                     var options = '<option value="">Seleccione una Localidad...</option>';
                     $.each(data, function(i, option_name) {
                         options += '<option value="' + i + '">' + option_name + '</option>';
                     });
                     $("#cmb_localidades").html(options);
                 },
-                error: function () {
+                error: function() {
                     alert(
-                    "Atención!! No se pudo recuperar información importante. \n\
+                            "Atención!! No se pudo recuperar información importante. \n\
 Cargue nuevamente la página; si el problema persiste informe al programador."
-                );
+                            );
                 }
             });
         });
-});
+    });
 </script>
 
 <div id="view1col">
