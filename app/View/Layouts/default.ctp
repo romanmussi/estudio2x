@@ -28,11 +28,9 @@
         <?php
         echo $this->Html->meta('icon');
 
-//        echo $this->Html->script('jquery-1.7.2.min');
-//        echo $this->Html->script('jquery-ui-1.8.22.custom.min');
-//        echo $this->Html->css('jquery-ui-1.8.22.custom');
-        echo $this->Html->script('jquery-1.9.1');
-        echo $this->Html->script('jquery-migrate-1.1.1');
+//        echo $this->Html->script('jquery-1.9.1');
+        echo $this->Html->script('jquery-1.10.2');
+//        echo $this->Html->script('jquery-migrate-1.1.1');
         echo $this->Html->script('jquery-ui-1.10.1.custom.min');
         echo $this->Html->css('jquery-ui-1.10.1.custom');
     
