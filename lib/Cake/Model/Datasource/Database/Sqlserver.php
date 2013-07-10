@@ -15,17 +15,17 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Model.Datasource.Database
  * @since         CakePHP(tm) v 0.10.5.1790
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('DboSource', 'Model/Datasource');
 
 /**
- * Dbo layer for Mircosoft's offical SQLServer driver
+ * Dbo layer for Microsoft's official SQLServer driver
  *
  * A Dbo layer for MS SQL Server 2005 and higher. Requires the
  * `pdo_sqlsrv` extension to be enabled.
- * 
+ *
  * @link http://www.php.net/manual/en/ref.pdo-sqlsrv.php
  *
  * @package       Cake.Model.Datasource.Database
@@ -167,17 +167,16 @@ class Sqlserver extends DboSource {
 		if (!$result) {
 			$result->closeCursor();
 			return array();
-		} else {
-			$tables = array();
-
-			while ($line = $result->fetch(PDO::FETCH_NUM)) {
-				$tables[] = $line[0];
-			}
-
-			$result->closeCursor();
-			parent::listSources($tables);
-			return $tables;
 		}
+		$tables = array();
+
+		while ($line = $result->fetch(PDO::FETCH_NUM)) {
+			$tables[] = $line[0];
+		}
+
+		$result->closeCursor();
+		parent::listSources($tables);
+		return $tables;
 	}
 
 /**
@@ -216,14 +215,20 @@ class Sqlserver extends DboSource {
 			$fields[$field] = array(
 				'type' => $this->column($column),
 				'null' => ($column->Null === 'YES' ? true : false),
-				'default' => preg_replace("/^[(]{1,2}'?([^')]*)?'?[)]{1,2}$/", "$1", $column->Default),
+				'default' => $column->Default,
 				'length' => $this->length($column),
 				'key' => ($column->Key == '1') ? 'primary' : false
 			);
 
 			if ($fields[$field]['default'] === 'null') {
 				$fields[$field]['default'] = null;
-			} else {
+			}
+			if ($fields[$field]['default'] !== null) {
+				$fields[$field]['default'] = preg_replace(
+					"/^[(]{1,2}'?([^')]*)?'?[)]{1,2}$/",
+					"$1",
+					$fields[$field]['default']
+				);
 				$this->value($fields[$field]['default'], $fields[$field]['type']);
 			}
 
@@ -307,9 +312,8 @@ class Sqlserver extends DboSource {
 				$result[] = $prepend . $fields[$i];
 			}
 			return $result;
-		} else {
-			return $fields;
 		}
+		return $fields;
 	}
 
 /**
@@ -378,9 +382,9 @@ class Sqlserver extends DboSource {
 			if (!strpos(strtolower($limit), 'top') || strpos(strtolower($limit), 'top') === 0) {
 				$rt = ' TOP';
 			}
-			$rt .= ' ' . $limit;
+			$rt .= sprintf(' %u', $limit);
 			if (is_int($offset) && $offset > 0) {
-				$rt = ' OFFSET ' . intval($offset) . ' ROWS FETCH FIRST ' . intval($limit) . ' ROWS ONLY';
+				$rt = sprintf(' OFFSET %u ROWS FETCH FIRST %u ROWS ONLY', $offset, $limit);
 			}
 			return $rt;
 		}
@@ -528,10 +532,8 @@ class Sqlserver extends DboSource {
 					";
 				} elseif (strpos($limit, 'FETCH') !== false) {
 					return "SELECT {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$group} {$order} {$limit}";
-				} else {
-					return "SELECT {$limit} {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$group} {$order}";
 				}
-			break;
+				return "SELECT {$limit} {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$group} {$order}";
 			case "schema":
 				extract($data);
 
