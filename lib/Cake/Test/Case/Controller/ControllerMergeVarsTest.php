@@ -94,7 +94,7 @@ class MergeVarPluginAppController extends MergeVarsAppController {
  *
  * @var array
  */
-	public $helpers = array('Javascript');
+	public $helpers = array('Js');
 
 /**
  * parent for mergeVars
@@ -118,7 +118,6 @@ class MergePostsController extends MergeVarPluginAppController {
  */
 	public $uses = array();
 }
-
 
 /**
  * Test Case for Controller Merging of Vars.
@@ -206,7 +205,7 @@ class ControllerMergeVarsTest extends CakeTestCase {
 
 		$expected = array(
 			'MergeVar' => array('format' => 'html', 'terse'),
-			'Javascript' => null
+			'Js' => null
 		);
 		$this->assertEquals($expected, $Controller->helpers, 'Helpers are unexpected.');
 
@@ -240,6 +239,8 @@ class ControllerMergeVarsTest extends CakeTestCase {
 /**
  * Ensure that $modelClass is correct even when Controller::$uses
  * has been iterated, eg: by a Component, or event handlers.
+ *
+ * @return void
  */
 	public function testMergeVarsModelClass() {
 		$Controller = new MergeVariablescontroller();

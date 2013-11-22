@@ -570,6 +570,7 @@ class ModelDeleteTest extends BaseModelTest {
 			'Tag' => array('with' => 'TestPlugin.ArticlesTag')
 		)), false);
 
+		$Article->ArticlesTag->order = null;
 		$this->assertTrue($Article->delete(1));
 	}
 
@@ -660,7 +661,7 @@ class ModelDeleteTest extends BaseModelTest {
 		$this->assertEquals(4, $result);
 
 		$result = $Article->delete(1, true);
-		$this->assertSame($result, true);
+		$this->assertTrue($result);
 
 		$result = $Article->Comment->find('count', array(
 			'conditions' => array('Comment.article_id' => 1)

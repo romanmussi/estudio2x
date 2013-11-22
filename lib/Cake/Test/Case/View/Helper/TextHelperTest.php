@@ -241,6 +241,14 @@ class TextHelperTest extends CakeTestCase {
 				'Text with a url http://www.not--work.com and more',
 				'Text with a url <a href="http://www.not--work.com">http://www.not--work.com</a> and more',
 			),
+			array(
+				'Text with a partial www.küchenschöhn-not-working.de URL',
+				'Text with a partial <a href="http://www.küchenschöhn-not-working.de">www.küchenschöhn-not-working.de</a> URL'
+			),
+			array(
+				'Text with a partial http://www.küchenschöhn-not-working.de URL',
+				'Text with a partial <a href="http://www.küchenschöhn-not-working.de">http://www.küchenschöhn-not-working.de</a> URL'
+			)
 		);
 	}
 
@@ -351,6 +359,16 @@ class TextHelperTest extends CakeTestCase {
 		$expected = 'Text with <a href="mailto:email@example.com" \s*class="link">email@example.com</a> address';
 		$result = $this->Text->autoLinkEmails($text, array('class' => 'link'));
 		$this->assertRegExp('#^' . $expected . '$#', $result);
+
+		$text = 'Text with düsentrieb@küchenschöhn-not-working.de address';
+		$expected = 'Text with <a href="mailto:düsentrieb@küchenschöhn-not-working.de">düsentrieb@küchenschöhn-not-working.de</a> address';
+		$result = $this->Text->autoLinkEmails($text);
+		$this->assertRegExp('#^' . $expected . '$#', $result);
+
+		$text = 'Text with me@subdomain.küchenschöhn.de address';
+		$expected = 'Text with <a href="mailto:me@subdomain.küchenschöhn.de">me@subdomain.küchenschöhn.de</a> address';
+		$result = $this->Text->autoLinkEmails($text);
+		$this->assertRegExp('#^' . $expected . '$#', $result);
 	}
 
 /**
@@ -362,6 +380,60 @@ class TextHelperTest extends CakeTestCase {
 		$result = $this->Text->autoLinkEmails('this is a myaddress@gmx-de test');
 		$expected = 'this is a myaddress@gmx-de test';
 		$this->assertEquals($expected, $result);
+	}
+
+/**
+ * testAutoParagraph method
+ *
+ * @return void
+ */
+	public function testAutoParagraph() {
+		$text = 'This is a test text';
+		$expected = <<<TEXT
+<p>This is a test text</p>
+
+TEXT;
+		$result = $this->Text->autoParagraph($text);
+		$text = 'This is a <br/> <BR> test text';
+		$expected = <<<TEXT
+<p>This is a </p>
+<p> test text</p>
+
+TEXT;
+		$result = $this->Text->autoParagraph($text);
+		$this->assertTextEquals($expected, $result);
+		$result = $this->Text->autoParagraph($text);
+		$text = 'This is a <BR id="test"/><br class="test"> test text';
+		$expected = <<<TEXT
+<p>This is a </p>
+<p> test text</p>
+
+TEXT;
+		$result = $this->Text->autoParagraph($text);
+		$this->assertTextEquals($expected, $result);
+		$text = <<<TEXT
+This is a test text.
+This is a line return.
+TEXT;
+		$expected = <<<TEXT
+<p>This is a test text.<br />
+This is a line return.</p>
+
+TEXT;
+		$result = $this->Text->autoParagraph($text);
+		$this->assertTextEquals($expected, $result);
+		$text = <<<TEXT
+This is a test text.
+
+This is a new line.
+TEXT;
+		$expected = <<<TEXT
+<p>This is a test text.</p>
+<p>This is a new line.</p>
+
+TEXT;
+		$result = $this->Text->autoParagraph($text);
+		$this->assertTextEquals($expected, $result);
 	}
 
 }

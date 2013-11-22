@@ -33,7 +33,8 @@ class TestCakeRequest extends CakeRequest {
  * reConstruct method
  *
  * @param string $url
- * @param bool $parseEnvironment
+ * @param boolean $parseEnvironment
+ * @return void
  */
 	public function reConstruct($url = 'some/path', $parseEnvironment = true) {
 		$this->_base();
@@ -126,7 +127,7 @@ class CakeRequestTest extends CakeTestCase {
 	}
 
 /**
- * Test that querystring args provided in the url string are parsed.
+ * Test that querystring args provided in the URL string are parsed.
  *
  * @return void
  */
@@ -156,7 +157,7 @@ class CakeRequestTest extends CakeTestCase {
 		$request = new CakeRequest();
 		$this->assertEquals('some/path', $request->url);
 
-		$_SERVER['REQUEST_URI'] = FULL_BASE_URL . '/other/path?url=http://cakephp.org';
+		$_SERVER['REQUEST_URI'] = Configure::read('App.fullBaseUrl') . '/other/path?url=http://cakephp.org';
 		$request = new CakeRequest();
 		$this->assertEquals('other/path', $request->url);
 	}
@@ -688,19 +689,15 @@ class CakeRequestTest extends CakeTestCase {
 		$result = $request->referer();
 		$this->assertSame($result, '/');
 
-		$_SERVER['HTTP_REFERER'] = FULL_BASE_URL . '/some/path';
+		$_SERVER['HTTP_REFERER'] = Configure::read('App.fullBaseUrl') . '/some/path';
 		$result = $request->referer(true);
 		$this->assertSame($result, '/some/path');
 
-		$_SERVER['HTTP_REFERER'] = FULL_BASE_URL . '/some/path';
+		$_SERVER['HTTP_REFERER'] = Configure::read('App.fullBaseUrl') . '/some/path';
 		$result = $request->referer(false);
-		$this->assertSame($result, FULL_BASE_URL . '/some/path');
+		$this->assertSame($result, Configure::read('App.fullBaseUrl') . '/some/path');
 
-		$_SERVER['HTTP_REFERER'] = FULL_BASE_URL . '/some/path';
-		$result = $request->referer(true);
-		$this->assertSame($result, '/some/path');
-
-		$_SERVER['HTTP_REFERER'] = FULL_BASE_URL . '/recipes/add';
+		$_SERVER['HTTP_REFERER'] = Configure::read('App.fullBaseUrl') . '/recipes/add';
 		$result = $request->referer(true);
 		$this->assertSame($result, '/recipes/add');
 
@@ -754,6 +751,40 @@ class CakeRequestTest extends CakeTestCase {
 
 		$_SERVER['REQUEST_METHOD'] = 'delete';
 		$this->assertFalse($request->is('delete'));
+	}
+
+/**
+ * Test is() with multiple types.
+ *
+ * @return void
+ */
+	public function testIsMultiple() {
+		$request = new CakeRequest('some/path');
+
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+		$this->assertTrue($request->is(array('get', 'post')));
+
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$this->assertTrue($request->is(array('get', 'post')));
+
+		$_SERVER['REQUEST_METHOD'] = 'PUT';
+		$this->assertFalse($request->is(array('get', 'post')));
+	}
+
+/**
+ * Test isAll()
+ *
+ * @return void
+ */
+	public function testIsAll() {
+		$request = new CakeRequest('some/path');
+
+		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+
+		$this->assertTrue($request->isAll(array('ajax', 'get')));
+		$this->assertFalse($request->isAll(array('post', 'get')));
+		$this->assertFalse($request->isAll(array('ajax', 'post')));
 	}
 
 /**
@@ -906,7 +937,7 @@ class CakeRequestTest extends CakeTestCase {
 		$this->assertEquals('posts', $request->controller);
 		$this->assertEquals('view', $request->action);
 		$this->assertEquals('blogs', $request->plugin);
-		$this->assertSame($request->banana, null);
+		$this->assertNull($request->banana);
 	}
 
 /**
@@ -1021,7 +1052,7 @@ class CakeRequestTest extends CakeTestCase {
  * Helper function for testing callbacks.
  *
  * @param $request
- * @return bool
+ * @return boolean
  */
 	public function detectCallback($request) {
 		return (bool)$request->return;
@@ -1127,6 +1158,41 @@ class CakeRequestTest extends CakeTestCase {
 	}
 
 /**
+ * Test parsing accept ignores index param
+ *
+ * @return void
+ */
+	public function testParseAcceptIgnoreAcceptExtensions() {
+		$_SERVER['HTTP_ACCEPT'] = 'application/json;level=1, text/plain, */*';
+
+		$request = new CakeRequest('/', false);
+		$result = $request->parseAccept();
+		$expected = array(
+			'1.0' => array('application/json', 'text/plain', '*/*'),
+		);
+		$this->assertEquals($expected, $result);
+	}
+
+/**
+ * Test that parsing accept headers with invalid syntax works.
+ *
+ * The header used is missing a q value for application/xml.
+ *
+ * @return void
+ */
+	public function testParseAcceptInvalidSyntax() {
+		$_SERVER['HTTP_ACCEPT'] = 'text/html,application/xhtml+xml,application/xml;image/png,image/jpeg,image/*;q=0.9,*/*;q=0.8';
+		$request = new CakeRequest('/', false);
+		$result = $request->parseAccept();
+		$expected = array(
+			'1.0' => array('text/html', 'application/xhtml+xml', 'application/xml', 'image/jpeg'),
+			'0.9' => array('image/*'),
+			'0.8' => array('*/*'),
+		);
+		$this->assertEquals($expected, $result);
+	}
+
+/**
  * Test baseUrl and webroot with ModRewrite
  *
  * @return void
@@ -1224,8 +1290,8 @@ class CakeRequestTest extends CakeTestCase {
 	}
 
 /**
- * Test base, webroot, url and here parsing when there is url rewriting but
- * CakePHP gets called with index.php in url nonetheless.
+ * Test base, webroot, URL and here parsing when there is URL rewriting but
+ * CakePHP gets called with index.php in URL nonetheless.
  *
  * Tests uri with
  * - index.php/
@@ -1288,7 +1354,7 @@ class CakeRequestTest extends CakeTestCase {
 	}
 
 /**
- * Test base, webroot, and url parsing when there is no url rewriting
+ * Test base, webroot, and URL parsing when there is no URL rewriting
  *
  * @return void
  */
@@ -1776,7 +1842,7 @@ class CakeRequestTest extends CakeTestCase {
 						'SERVER_NAME' => 'localhost',
 						'DOCUMENT_ROOT' => '/Library/WebServer/Documents',
 						'SCRIPT_FILENAME' => '/Library/WebServer/Documents/site/index.php',
-						'REQUEST_URI' => FULL_BASE_URL . '/site/posts/index',
+						'REQUEST_URI' => '/site/posts/index',
 						'SCRIPT_NAME' => '/site/app/webroot/index.php',
 						'PHP_SELF' => '/site/app/webroot/index.php',
 					),
@@ -1877,6 +1943,26 @@ class CakeRequestTest extends CakeTestCase {
 
 		$result = $request->query('test.2');
 		$this->assertNull($result);
+	}
+
+/**
+ * Test using param()
+ *
+ * @return void
+ */
+	public function testReadingParams() {
+		$request = new CakeRequest();
+		$request->addParams(array(
+			'controller' => 'posts',
+			'admin' => true,
+			'truthy' => 1,
+			'zero' => '0',
+		));
+		$this->assertFalse($request->param('not_set'));
+		$this->assertTrue($request->param('admin'));
+		$this->assertEquals(1, $request->param('truthy'));
+		$this->assertEquals('posts', $request->param('controller'));
+		$this->assertEquals('0', $request->param('zero'));
 	}
 
 /**
@@ -2105,6 +2191,7 @@ XML;
 /**
  * Test onlyAllow throwing exception
  *
+ * @return void
  */
 	public function testOnlyAllowException() {
 		$_SERVER['REQUEST_METHOD'] = 'PUT';

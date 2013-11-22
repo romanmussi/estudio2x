@@ -1,6 +1,6 @@
 <?php
 /**
- * Cake Socket connection class.
+ * CakePHP Socket connection class.
  *
  * PHP 5
  *
@@ -21,7 +21,7 @@
 App::uses('Validation', 'Utility');
 
 /**
- * Cake network socket connection class.
+ * CakePHP network socket connection class.
  *
  * Core base class for network communication.
  *
@@ -184,8 +184,9 @@ class CakeSocket {
  *
  * Instead we need to handle those errors manually.
  *
- * @param int $code
+ * @param integer $code
  * @param string $message
+ * @return void
  */
 	protected function _connectionErrorHandler($code, $message) {
 		$this->_connectionErrors[] = $message;

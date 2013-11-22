@@ -313,7 +313,7 @@ class DboSource extends DataSource {
  * Returns a quoted and escaped string of $data for use in an SQL statement.
  *
  * @param string $data String to be prepared for use in an SQL statement
- * @param string $column The column into which this data will be inserted
+ * @param string $column The column datatype into which this data will be inserted.
  * @return string Quoted and escaped data
  */
 	public function value($data, $column = null) {
@@ -771,7 +771,7 @@ class DboSource extends DataSource {
 		if ($this->cacheMethods === false) {
 			return $value;
 		}
-		if (empty(self::$methodCache)) {
+		if (!$this->_methodCacheChange && empty(self::$methodCache)) {
 			self::$methodCache = Cache::read('method_cache', '_cake_core_');
 		}
 		if ($value === null) {
@@ -861,7 +861,7 @@ class DboSource extends DataSource {
  * @return boolean True if the result is valid else false
  */
 	public function hasResult() {
-		return is_a($this->_result, 'PDOStatement');
+		return $this->_result instanceof PDOStatement;
 	}
 
 /**
@@ -898,7 +898,7 @@ class DboSource extends DataSource {
 		if (PHP_SAPI !== 'cli') {
 			$controller = null;
 			$View = new View($controller, false);
-			$View->set('logs', array($this->configKeyName => $log));
+			$View->set('sqlLogs', array($this->configKeyName => $log));
 			echo $View->element('sql_dump', array('_forced_from_dbo_' => true));
 		} else {
 			foreach ($log['log'] as $k => $i) {
@@ -952,14 +952,14 @@ class DboSource extends DataSource {
 
 		if ($quote) {
 			if ($schema && !empty($schemaName)) {
-				if (false == strstr($table, '.')) {
+				if (strstr($table, '.') === false) {
 					return $this->name($schemaName) . '.' . $this->name($table);
 				}
 			}
 			return $this->name($table);
 		}
 		if ($schema && !empty($schemaName)) {
-			if (false == strstr($table, '.')) {
+			if (strstr($table, '.') === false) {
 				return $schemaName . '.' . $table;
 			}
 		}
@@ -1035,7 +1035,7 @@ class DboSource extends DataSource {
 			$recursive = $queryData['recursive'];
 		}
 
-		if (!is_null($recursive)) {
+		if ($recursive !== null) {
 			$_recursive = $model->recursive;
 			$model->recursive = $recursive;
 		}
@@ -1065,14 +1065,14 @@ class DboSource extends DataSource {
 					if ($bypass) {
 						$assocData['fields'] = false;
 					}
-					if (true === $this->generateAssociationQuery($model, $linkModel, $type, $assoc, $assocData, $queryData, $external, $null)) {
+					if ($this->generateAssociationQuery($model, $linkModel, $type, $assoc, $assocData, $queryData, $external, $null) === true) {
 						$linkedModels[$type . '/' . $assoc] = true;
 					}
 				}
 			}
 		}
 
-		$query = trim($this->generateAssociationQuery($model, null, null, null, null, $queryData, false, $null));
+		$query = $this->generateAssociationQuery($model, null, null, null, null, $queryData, false, $null);
 
 		$resultSet = $this->fetchAll($query, $model->cacheQueries);
 
@@ -1123,7 +1123,7 @@ class DboSource extends DataSource {
 			}
 		}
 
-		if (!is_null($recursive)) {
+		if ($recursive !== null) {
 			$model->recursive = $_recursive;
 		}
 		return $resultSet;
@@ -1730,8 +1730,10 @@ class DboSource extends DataSource {
  * @return string
  */
 	public function renderJoinStatement($data) {
-		extract($data);
-		return trim("{$type} JOIN {$table} {$alias} ON ({$conditions})");
+		if (strtoupper($data['type']) === 'CROSS') {
+			return "{$data['type']} JOIN {$data['table']} {$data['alias']}";
+		}
+		return trim("{$data['type']} JOIN {$data['table']} {$data['alias']} ON ({$data['conditions']})");
 	}
 
 /**
@@ -1747,19 +1749,19 @@ class DboSource extends DataSource {
 
 		switch (strtolower($type)) {
 			case 'select':
-				return "SELECT {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$group} {$order} {$limit}";
+				return trim("SELECT {$fields} FROM {$table} {$alias} {$joins} {$conditions} {$group} {$order} {$limit}");
 			case 'create':
 				return "INSERT INTO {$table} ({$fields}) VALUES ({$values})";
 			case 'update':
 				if (!empty($alias)) {
 					$aliases = "{$this->alias}{$alias} {$joins} ";
 				}
-				return "UPDATE {$table} {$aliases}SET {$fields} {$conditions}";
+				return trim("UPDATE {$table} {$aliases}SET {$fields} {$conditions}");
 			case 'delete':
 				if (!empty($alias)) {
 					$aliases = "{$this->alias}{$alias} {$joins} ";
 				}
-				return "DELETE {$alias} FROM {$table} {$aliases}{$conditions}";
+				return trim("DELETE {$alias} FROM {$table} {$aliases}{$conditions}");
 			case 'schema':
 				foreach (array('columns', 'indexes', 'tableParameters') as $var) {
 					if (is_array(${$var})) {
@@ -2031,7 +2033,7 @@ class DboSource extends DataSource {
  * primary key, where applicable.
  *
  * @param Model|string $table A string or model class representing the table to be truncated
- * @return boolean	SQL TRUNCATE TABLE statement, false if not applicable.
+ * @return boolean SQL TRUNCATE TABLE statement, false if not applicable.
  */
 	public function truncate($table) {
 		return $this->execute('TRUNCATE TABLE ' . $this->fullTableName($table));
@@ -2279,6 +2281,7 @@ class DboSource extends DataSource {
 			$fields,
 			$quote,
 			ConnectionManager::getSourceName($this),
+			$model->schemaName,
 			$model->table
 		);
 		$cacheKey = md5(serialize($cacheKey));
@@ -2489,7 +2492,7 @@ class DboSource extends DataSource {
 					$keys = array_keys($value);
 					if ($keys === array_values($keys)) {
 						$count = count($value);
-						if ($count === 1 && !preg_match("/\s+NOT$/", $key)) {
+						if ($count === 1 && !preg_match('/\s+(?:NOT|\!=)$/', $key)) {
 							$data = $this->_quoteFields($key) . ' = (';
 							if ($quoteValues) {
 								if (is_object($model)) {
@@ -2959,7 +2962,7 @@ class DboSource extends DataSource {
  * @return string
  */
 	public function createSchema($schema, $tableName = null) {
-		if (!is_a($schema, 'CakeSchema')) {
+		if (!$schema instanceof CakeSchema) {
 			trigger_error(__d('cake_dev', 'Invalid schema object'), E_USER_WARNING);
 			return null;
 		}
