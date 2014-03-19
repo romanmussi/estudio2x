@@ -2,8 +2,6 @@
 /**
  * SQLite layer for DBO
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -252,9 +250,8 @@ class Sqlite extends DboSource {
 		}
 
 		$col = strtolower(str_replace(')', '', $real));
-		$limit = null;
 		if (strpos($col, '(') !== false) {
-			list($col, $limit) = explode('(', $col);
+			list($col) = explode('(', $col);
 		}
 
 		$standard = array(

@@ -2,8 +2,6 @@
 /**
  * String handling methods.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -107,7 +105,7 @@ class String {
  * @param string $separator The token to split the data on.
  * @param string $leftBound The left boundary to ignore separators in.
  * @param string $rightBound The right boundary to ignore separators in.
- * @return array Array of tokens in $data.
+ * @return mixed Array of tokens in $data or original input if empty.
  */
 	public static function tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')') {
 		if (empty($data) || is_array($data)) {

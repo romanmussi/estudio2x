@@ -2,15 +2,13 @@
 /**
  * DboPostgresTest file
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Test.Case.Model.Datasource.Database
  * @since         CakePHP(tm) v 1.2.0
@@ -571,6 +569,38 @@ class PostgresTest extends CakeTestCase {
 	}
 
 /**
+ * testCakeSchemaBegserial method
+ *
+ * Test that schema generated postgresql queries are valid.
+ *
+ * @return void
+ */
+	public function testCakeSchemaBigserial() {
+		$db1 = ConnectionManager::getDataSource('test');
+		$db1->cacheSources = false;
+
+		$db1->rawQuery('CREATE TABLE ' . $db1->fullTableName('bigserial_tests') . ' (
+			"id" bigserial NOT NULL,
+			"varchar" character varying(40) NOT NULL,
+			PRIMARY KEY ("id")
+		)');
+
+		$schema = new CakeSchema(array('connection' => 'test'));
+		$result = $schema->read(array(
+			'connection' => 'test',
+			'models' => array('BigserialTest')
+		));
+		$schema->tables = array(
+			'bigserial_tests' => $result['tables']['missing']['bigserial_tests']
+		);
+		$result = $db1->createSchema($schema, 'bigserial_tests');
+
+		$this->assertContains('"id" bigserial NOT NULL,', $result);
+
+		$db1->query('DROP TABLE ' . $db1->fullTableName('bigserial_tests'));
+	}
+
+/**
  * Test index generation from table info.
  *
  * @return void
@@ -663,6 +693,34 @@ class PostgresTest extends CakeTestCase {
 		));
 		$result = $this->Dbo->alterSchema($New->compare($Old), 'alter_posts');
 		$this->assertNotRegExp('/varchar\(36\) NOT NULL/i', $result);
+	}
+
+/**
+ * Test the alterSchema changing boolean to integer
+ *
+ * @return void
+ */
+	public function testAlterSchemaBooleanToIntegerField() {
+		$default = array(
+			'connection' => 'test',
+			'name' => 'BoolField',
+			'bool_fields' => array(
+				'id' => array('type' => 'integer', 'key' => 'primary'),
+				'name' => array('type' => 'string', 'length' => 50),
+				'active' => array('type' => 'boolean', 'null' => false),
+			)
+		);
+		$Old = new CakeSchema($default);
+		$result = $this->Dbo->query($this->Dbo->createSchema($Old));
+		$this->assertTrue($result);
+
+		$modified = $default;
+		$modified['bool_fields']['active'] = array('type' => 'integer', 'null' => true);
+
+		$New = new CakeSchema($modified);
+		$query = $this->Dbo->alterSchema($New->compare($Old));
+		$result = $this->Dbo->query($query);
+		$this->Dbo->query($this->Dbo->dropSchema($Old));
 	}
 
 /**

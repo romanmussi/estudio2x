@@ -2,8 +2,6 @@
 /**
  * SecurityComponentTest file
  *
- * PHP 5
- *
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -609,7 +607,7 @@ class SecurityComponentTest extends CakeTestCase {
 		$fields = '69f493434187b867ea14b901fdf58b55d27c935d%3A';
 		$unlocked = '';
 
-		$this->Controller->request->data = $data = array(
+		$this->Controller->request->data = array(
 			'Model' => array('username' => '', 'password' => ''),
 			'_Token' => compact('key', 'fields', 'unlocked')
 		);

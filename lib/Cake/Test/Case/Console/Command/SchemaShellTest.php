@@ -2,8 +2,6 @@
 /**
  * SchemaShellTest Test file
  *
- * PHP 5
- *
  * CakePHP : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -529,7 +527,7 @@ class SchemaShellTest extends CakeTestCase {
 		$this->Shell->expects($this->any())
 			->method('in')
 			->will($this->returnValue('y'));
-		$r = $this->Shell->expects($this->once())
+		$this->Shell->expects($this->once())
 			->method('_run')
 			->with($this->arrayHasKey('newone'), 'update', $this->isInstanceOf('CakeSchema'));
 
@@ -587,7 +585,7 @@ class SchemaShellTest extends CakeTestCase {
 
 /**
  * test that passing name and file creates the passed filename with the
- * passed classname
+ * passed class name
  *
  * @return void
  */

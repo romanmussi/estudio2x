@@ -16,6 +16,7 @@
 
 App::uses('Router', 'Routing');
 App::uses('Hash', 'Utility');
+App::uses('Inflector', 'Utility');
 
 /**
  * Abstract base class for all other Helpers in CakePHP.
@@ -780,7 +781,7 @@ class Helper extends Object {
  * Adds the given class to the element options
  *
  * @param array $options Array options/attributes to add a class to
- * @param string $class The classname being added.
+ * @param string $class The class name being added.
  * @param string $key the key to use for class.
  * @return array Array of options with $key set.
  */

@@ -29,7 +29,7 @@ App::uses('CakeEventManager', 'Event');
  *
  * Controllers should provide a number of 'action' methods. These are public methods on the controller
  * that are not prefixed with a '_' and not part of Controller. Each action serves as an endpoint for
- * performing a specific action on a resource or collection of resources. For example adding or editing a new
+ * performing a specific action on a resource or collection of resources. For example: adding or editing a new
  * object, or listing a set of objects.
  *
  * You can access request parameters, using `$this->request`. The request object contains all the POST, GET and FILES
@@ -86,7 +86,7 @@ class Controller extends Object implements CakeEventListener {
 
 /**
  * An array containing the names of helpers this controller uses. The array elements should
- * not contain the "Helper" part of the classname.
+ * not contain the "Helper" part of the class name.
  *
  * Example: `public $helpers = array('Html', 'Js', 'Time', 'Ajax');`
  *
@@ -114,7 +114,7 @@ class Controller extends Object implements CakeEventListener {
 	public $response;
 
 /**
- * The classname to use for creating the response object.
+ * The class name to use for creating the response object.
  *
  * @var string
  */
@@ -182,7 +182,7 @@ class Controller extends Object implements CakeEventListener {
 
 /**
  * Array containing the names of components this controller uses. Component names
- * should not contain the "Component" portion of the classname.
+ * should not contain the "Component" portion of the class name.
  *
  * Example: `public $components = array('Session', 'RequestHandler', 'Acl');`
  *
@@ -259,7 +259,7 @@ class Controller extends Object implements CakeEventListener {
 
 /**
  * Holds current methods of the controller. This is a list of all the methods reachable
- * via URL. Modifying this array, will allow you to change which methods can be reached.
+ * via URL. Modifying this array will allow you to change which methods can be reached.
  *
  * @var array
  */
@@ -285,7 +285,7 @@ class Controller extends Object implements CakeEventListener {
 	public $modelKey = null;
 
 /**
- * Holds any validation errors produced by the last call of the validateErrors() method/
+ * Holds any validation errors produced by the last call of the validateErrors() method.
  *
  * @var array Validation errors, or false if none
  */
@@ -610,7 +610,7 @@ class Controller extends Object implements CakeEventListener {
 	}
 
 /**
- * Returns a list of all events that will fire in the controller during it's lifecycle.
+ * Returns a list of all events that will fire in the controller during its lifecycle.
  * You can override this function to add you own listener callbacks
  *
  * @return array

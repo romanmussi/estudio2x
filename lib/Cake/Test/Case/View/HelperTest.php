@@ -2,8 +2,6 @@
 /**
  * HelperTest file
  *
- * PHP 5
- *
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -851,6 +849,16 @@ class HelperTest extends CakeTestCase {
 
 		$result = $this->Helper->clean('&lt;script&gt;alert(document.cookie)&lt;/script&gt;');
 		$this->assertEquals('&amp;lt;script&amp;gt;alert(document.cookie)&amp;lt;/script&amp;gt;', $result);
+	}
+
+/**
+ * testDomId method
+ *
+ * @return void
+ */
+	public function testDomId() {
+		$result = $this->Helper->domId('Foo.bar');
+		$this->assertEquals('FooBar', $result);
 	}
 
 /**

@@ -2,8 +2,6 @@
 /**
  * DboMysqlTest file
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -2505,6 +2503,25 @@ class MysqlTest extends CakeTestCase {
 			'? BETWEEN Model.field1 AND Model.field2' => '2009-03-04'
 		)));
 		$expected = " WHERE '2009-03-04' BETWEEN Model.field1 AND Model.field2";
+		$this->assertEquals($expected, $result);
+	}
+
+/**
+ * test conditions() with replacements.
+ *
+ * @return void
+ */
+	public function testConditionsWithReplacements() {
+		$result = $this->Dbo->conditions(array(
+			'score BETWEEN :0 AND :1' => array(90.1, 95.7)
+		));
+		$expected = " WHERE `score` BETWEEN 90.1 AND 95.7";
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Dbo->conditions(array(
+			'score BETWEEN ? AND ?' => array(90.1, 95.7)
+		));
+		$expected = " WHERE `score` BETWEEN 90.1 AND 95.7";
 		$this->assertEquals($expected, $result);
 	}
 

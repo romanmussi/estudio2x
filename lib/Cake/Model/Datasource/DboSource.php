@@ -2,8 +2,6 @@
 /**
  * Dbo Source
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -646,7 +644,8 @@ class DboSource extends DataSource {
  *   by setting $options to `false`
  *
  * @param string $sql SQL statement
- * @param array $params parameters to be bound as values for the SQL statement
+ * @param array|boolean $params Either parameters to be bound as values for the SQL statement,
+ *  or a boolean to control query caching.
  * @param array $options additional options for the query.
  * @return boolean|array Array of resultset rows, or false if no rows matched
  */
@@ -663,7 +662,8 @@ class DboSource extends DataSource {
 		if ($cache && ($cached = $this->getQueryCache($sql, $params)) !== false) {
 			return $cached;
 		}
-		if ($result = $this->execute($sql, array(), $params)) {
+		$result = $this->execute($sql, array(), $params);
+		if ($result) {
 			$out = array();
 
 			if ($this->hasResult()) {
@@ -1398,7 +1398,7 @@ class DboSource extends DataSource {
 			if (isset($merge[$association])) {
 				$data[$association] = $merge[$association][0];
 			} else {
-				if (count($merge[0][$association]) > 1) {
+				if (!empty($merge[0][$association])) {
 					foreach ($merge[0] as $assoc => $data2) {
 						if ($assoc !== $association) {
 							$merge[0][$association][$assoc] = $data2;
@@ -2734,7 +2734,7 @@ class DboSource extends DataSource {
 			if (is_object($model) && $model->isVirtualField($key)) {
 				$key = '(' . $this->_quoteFields($model->getVirtualField($key)) . ')';
 			}
-			list($alias, $field) = pluginSplit($key);
+			list($alias) = pluginSplit($key);
 			if (is_object($model) && $alias !== $model->alias && is_object($model->{$alias}) && $model->{$alias}->isVirtualField($key)) {
 				$key = '(' . $this->_quoteFields($model->{$alias}->getVirtualField($key)) . ')';
 			}
@@ -2832,7 +2832,7 @@ class DboSource extends DataSource {
 			'int' => 1, 'tinyint' => 1, 'smallint' => 1, 'mediumint' => 1, 'integer' => 1, 'bigint' => 1
 		);
 
-		list($real, $type, $length, $offset, $sign, $zerofill) = $result;
+		list($real, $type, $length, $offset, $sign) = $result;
 		$typeArr = $type;
 		$type = $type[0];
 		$length = $length[0];
@@ -3241,13 +3241,12 @@ class DboSource extends DataSource {
 		}
 
 		$isAllFloat = $isAllInt = true;
-		$containsFloat = $containsInt = $containsString = false;
+		$containsInt = $containsString = false;
 		foreach ($value as $valElement) {
 			$valElement = trim($valElement);
 			if (!is_float($valElement) && !preg_match('/^[\d]+\.[\d]+$/', $valElement)) {
 				$isAllFloat = false;
 			} else {
-				$containsFloat = true;
 				continue;
 			}
 			if (!is_int($valElement) && !preg_match('/^[\d]+$/', $valElement)) {
@@ -3305,7 +3304,6 @@ class DboSource extends DataSource {
 
 /**
  * Used for storing in cache the results of the in-memory methodCache
- *
  */
 	public function __destruct() {
 		if ($this->_methodCacheChange) {

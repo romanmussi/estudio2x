@@ -4,8 +4,6 @@
  *
  * Enables a model object to act as a node-based tree.
  *
- * PHP 5
- *
  * CakePHP :  Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -214,7 +212,7 @@ class TreeBehavior extends ModelBehavior {
 					'fields' => array($Model->primaryKey, $parent, $left, $right), 'recursive' => $recursive)
 				);
 
-				if ($values === false) {
+				if (empty($values)) {
 					return false;
 				}
 				list($node) = array_values($values);

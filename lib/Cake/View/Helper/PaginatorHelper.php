@@ -136,7 +136,7 @@ class PaginatorHelper extends AppHelper {
 /**
  * Convenience access to any of the paginator params.
  *
- * @param string $key Key of the paginator params array to retreive.
+ * @param string $key Key of the paginator params array to retrieve.
  * @param string $model Optional model name. Uses the default if none is specified.
  * @return mixed Content of the requested param.
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/paginator.html#PaginatorHelper::params
@@ -264,6 +264,7 @@ class PaginatorHelper extends AppHelper {
  *
  * ### Options:
  *
+ * - `url` Allows sending routing parameters such as controllers, actions or passed arguments.
  * - `tag` The tag wrapping tag you want to use, defaults to 'span'. Set this to false to disable this option
  * - `escape` Whether you want the contents html entity encoded, defaults to true
  * - `model` The model to use, defaults to PaginatorHelper::defaultModel()
@@ -289,6 +290,7 @@ class PaginatorHelper extends AppHelper {
  *
  * ### Options:
  *
+ * - `url` Allows sending routing parameters such as controllers, actions or passed arguments.
  * - `tag` The tag wrapping tag you want to use, defaults to 'span'. Set this to false to disable this option
  * - `escape` Whether you want the contents html entity encoded, defaults to true
  * - `model` The model to use, defaults to PaginatorHelper::defaultModel()
