@@ -29,7 +29,8 @@
         echo $this->Html->meta('icon');
 
 //        echo $this->Html->script('jquery-1.9.1');
-        echo $this->Html->script('jquery-1.10.2');
+//        echo $this->Html->script('jquery-1.10.2');
+        echo $this->Html->script('jquery-1.11.0');
 //        echo $this->Html->script('jquery-migrate-1.1.1');
         echo $this->Html->script('jquery-ui-1.10.1.custom.min');
         echo $this->Html->css('jquery-ui-1.10.1.custom');
