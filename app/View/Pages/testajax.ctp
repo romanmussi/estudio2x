@@ -1,4 +1,4 @@
-<?php //;             ?>
+<?php //; ?>
 <script>
     $(document).ready(function() {
         //Muestra mensaje de error si falla llamada ajax en tabs
