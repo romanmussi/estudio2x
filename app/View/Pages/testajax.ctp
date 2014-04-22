@@ -1,4 +1,6 @@
-<?php //; ?>
+<?php
+
+//; ?>
 <script>
     $(document).ready(function() {
         //Muestra mensaje de error si falla llamada ajax en tabs
@@ -130,6 +132,7 @@ Cargue nuevamente la página; si el problema persiste informe al programador."
             alert($("#cmb_select").val());
             return false;
         });
+        //--------------------
         //Combos relacionados
         //Carga jurisdicciones
         $.ajax({
@@ -210,8 +213,8 @@ Cargue nuevamente la página; si el problema persiste informe al programador."
             <li><?php echo $this->Html->link('Tab 3 - Roto', array('controller' => 'Pages', 'action' => 'tab3ajax')); ?></li>
         </ul>
     </div>
-    <h4>jQuery UI - Mostrar y ocultar un div, cargar texto</h4>
-    <p><div id="divtest">DIV test</div></p>
+<h4>jQuery UI - Mostrar y ocultar un div, cargar texto</h4>
+<div id="divtest"><p>Div test</p></div>
 <p><a id="mostrar" href="#">Muestra div</a></p>
 <p><a id="ocultar" href="#">Oculta div</a></p>
 <p><a id="cargar1" href="#">Poner texto en div</a></p>
