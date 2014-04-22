@@ -18,6 +18,21 @@ class Tipoinstit extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Jurisdiccion' => array(
+			'className' => 'Jurisdiccion',
+			'foreignKey' => 'jurisdiccion_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+        
+/**
  * hasMany associations
  *
  * @var array

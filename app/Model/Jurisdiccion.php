@@ -24,19 +24,6 @@ class Jurisdiccion extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Instit' => array(
-			'className' => 'Instit',
-			'foreignKey' => 'jurisdiccion_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Departamento' => array(
 			'className' => 'Departamento',
 			'foreignKey' => 'jurisdiccion_id',

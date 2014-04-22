@@ -1,6 +1,4 @@
-<?php
-
-//debug($localidades); ?>
+<?php //debug($localidades); ?>
 <div id="view1col">
     <!--<div class="localidades index">-->
     <h2><?php echo __('Localidades'); ?></h2>

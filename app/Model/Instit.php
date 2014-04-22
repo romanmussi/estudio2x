@@ -4,9 +4,7 @@ App::uses('AppModel', 'Model');
  * Instit Model
  *
  * @property Tipoinstit $Tipoinstit
- * @property Jurisdiccion $Jurisdiccion
  * @property Localidad $Localidad
- * @property Departamento $Departamento
  */
 class Instit extends AppModel {
 
@@ -33,23 +31,9 @@ class Instit extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Jurisdiccion' => array(
-			'className' => 'Jurisdiccion',
-			'foreignKey' => 'jurisdiccion_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Localidad' => array(
 			'className' => 'Localidad',
 			'foreignKey' => 'localidad_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Departamento' => array(
-			'className' => 'Departamento',
-			'foreignKey' => 'departamento_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
