@@ -1,10 +1,13 @@
+<?php //debug($jurisdicciones); ?>
+<?php //debug($departamentos); ?>
+<?php //debug($this->request->data); ?>
 <div id="view1col">
-<!--<div class="localidades form">-->
 <?php echo $this->Form->create('Localidad'); ?>
 	<fieldset>
 		<legend><?php echo __('Edit Localidad'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
+		echo $this->Form->input('Departamento.jurisdiccion_id');
 		echo $this->Form->input('departamento_id');
 		echo $this->Form->input('name');
 	?>

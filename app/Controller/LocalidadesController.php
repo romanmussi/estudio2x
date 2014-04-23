@@ -93,7 +93,7 @@ class LocalidadesController extends AppController {
         $localidades = $this->Localidad->find('list', array('conditions' => array('Localidad.departamento_id' => $departamento_id)));
         $this->set('localidades', $localidades);
     }
-    
+
     /**
      * edit method
      *
@@ -116,8 +116,14 @@ class LocalidadesController extends AppController {
         } else {
             $this->request->data = $this->Localidad->read(null, $id);
         }
-        $departamentos = $this->Localidad->Departamento->find('list');
-        $this->set(compact('departamentos'));
+        //para mostrar juris
+        $jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
+//        $this->log($this->data, 'debug');
+        //filtrar departamentos de una jurisdiccion
+        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
+            array('Departamento.jurisdiccion_id' => $this->data['Departamento']['jurisdiccion_id'])));
+//        $departamentos = $this->Localidad->Departamento->find('list');
+        $this->set(compact('jurisdicciones', 'departamentos'));
     }
 
     /**
