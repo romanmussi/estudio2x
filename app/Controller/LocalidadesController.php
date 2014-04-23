@@ -15,10 +15,7 @@ class LocalidadesController extends AppController {
      * @return void
      */
     public function index() {
-        $this->paginate = array(
-            'limit' => 10,
-            'order' => array('Localidad.id' => 'asc')
-        );
+        $this->paginate = array('limit' => 10);
         $this->Localidad->recursive = 0;
         $this->set('localidades', $this->paginate());
     }
