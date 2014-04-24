@@ -53,6 +53,10 @@ class AppController extends Controller {
 
         //Generando array para vista, para constuir menutop
         $this->set('mymenutop', $this->defineMenu());
+
+        //para ver request con detalle, util para ver llamadas ajax por ejemplo
+//        $this->log($this->request, 'debug');
+        
     }
 
     function defineMenu() {

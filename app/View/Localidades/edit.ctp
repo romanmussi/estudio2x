@@ -1,6 +1,31 @@
 <?php //debug($jurisdicciones); ?>
 <?php //debug($departamentos); ?>
 <?php //debug($this->request->data); ?>
+<script>
+    $(document).ready(function() {        
+        //Define onchange de jurisdicciones > Carga departamentos
+        $("#DepartamentoJurisdiccionId").on("change", function() {
+            $.ajax({
+                dataType: "json",
+                url: "../lista_departamentos/" + $(this).val(),
+                data: "",
+                success: function(data, textStatus) {
+                    var options = '<option value="">Seleccione un Departamento...</option>';
+                    $.each(data, function(i, option_name) {
+                        options += '<option value="' + i + '">' + option_name + '</option>';
+                    });
+                    $("#LocalidadDepartamentoId").html(options);
+                },
+                error: function() {
+                    alert(
+                            "Atención!! No se pudo recuperar información importante. \n\
+Cargue nuevamente la página; si el problema persiste informe al programador."
+                            );
+                }
+            });
+        });
+     });
+</script>
 <div id="view1col">
 <?php echo $this->Form->create('Localidad'); ?>
 	<fieldset>
