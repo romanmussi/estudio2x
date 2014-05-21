@@ -38,40 +38,6 @@ class LocalidadesController extends AppController {
         $this->set('localidad', $this->Localidad->read(null, $id));
     }
 
-    /**
-     * add method
-     *
-     * @return void
-     */
-    public function add() {
-
-//        debug($this->request->data);
-
-        if ($this->request->is('post')) {
-            $this->Localidad->create();
-            if ($this->Localidad->save($this->request->data)) {
-                $this->Session->setFlash(__('The localidad has been saved'));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The localidad could not be saved. Please, try again.'));
-            }
-        }
-
-        //obtener jurisdicciones
-        //$jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
-        //asigna jurisdiccion id para busqueda de departamentos relacionados
-        if (!empty($this->request->data)) {
-            $jurisdiccion_id = $this->request->data['Localidad']['jurisdiccion_id'];
-        } else {
-            $jurisdiccion_id = '';
-        }
-
-        //obtener departamentos de una jurisdiccion
-//        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
-//            array('Departamento.jurisdiccion_id' => $jurisdiccion_id)));
-//        $this->set(compact('jurisdicciones', 'departamentos'));
-    }
-
     public function lista_jurisdicciones() {
         //obtener jurisdicciones
         $jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
@@ -94,7 +60,53 @@ class LocalidadesController extends AppController {
                 array('conditions' => array('Localidad.departamento_id' => $departamento_id)));
         $this->set('localidades', $localidades);
     }
+    
+    /**
+     * add method
+     *
+     * @return void
+     */
+    public function add() {
 
+//        debug($this->request->data);
+
+        if ($this->request->is('post')) {
+            $this->Localidad->create();
+            if ($this->Localidad->save($this->request->data)) {
+                $this->Session->setFlash(__('The localidad has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The localidad could not be saved. Please, try again.'));
+            }
+        }
+
+        //para mostrar juris
+        $jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
+//        $this->log($this->data, 'debug');
+
+        //filtrar departamentos de una jurisdiccion
+        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
+            array('Departamento.jurisdiccion_id' => $this->data['Departamento']['jurisdiccion_id'])));
+//        $departamentos = $this->Localidad->Departamento->find('list');
+        $this->set(compact('jurisdicciones', 'departamentos'));
+        
+        
+        
+        //obtener jurisdicciones
+        //$jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
+        //asigna jurisdiccion id para busqueda de departamentos relacionados
+        if (!empty($this->request->data)) {
+            $jurisdiccion_id = $this->request->data['Localidad']['jurisdiccion_id'];
+        } else {
+            $jurisdiccion_id = '';
+        }
+
+        //obtener departamentos de una jurisdiccion
+//        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
+//            array('Departamento.jurisdiccion_id' => $jurisdiccion_id)));
+//        $this->set(compact('jurisdicciones', 'departamentos'));
+    }
+    
     /**
      * edit method
      *
