@@ -79,21 +79,9 @@ class LocalidadesController extends AppController {
                 $this->Session->setFlash(__('The localidad could not be saved. Please, try again.'));
             }
         }
-
-        //para mostrar juris
-        $jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
-//        $this->log($this->data, 'debug');
-
-        //filtrar departamentos de una jurisdiccion
-        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
-            array('Departamento.jurisdiccion_id' => $this->data['Departamento']['jurisdiccion_id'])));
-//        $departamentos = $this->Localidad->Departamento->find('list');
-        $this->set(compact('jurisdicciones', 'departamentos'));
-        
-        
-        
+       
         //obtener jurisdicciones
-        //$jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
+        $jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');
         //asigna jurisdiccion id para busqueda de departamentos relacionados
         if (!empty($this->request->data)) {
             $jurisdiccion_id = $this->request->data['Localidad']['jurisdiccion_id'];
@@ -102,9 +90,9 @@ class LocalidadesController extends AppController {
         }
 
         //obtener departamentos de una jurisdiccion
-//        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
-//            array('Departamento.jurisdiccion_id' => $jurisdiccion_id)));
-//        $this->set(compact('jurisdicciones', 'departamentos'));
+        $departamentos = $this->Localidad->Departamento->find('list', array('conditions' =>
+            array('Departamento.jurisdiccion_id' => $jurisdiccion_id)));
+        $this->set(compact('jurisdicciones', 'departamentos'));
     }
     
     /**
