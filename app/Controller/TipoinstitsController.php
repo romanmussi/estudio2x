@@ -13,7 +13,12 @@ class TipoinstitsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Tipoinstit->recursive = 0;
+	$this->paginate = array(
+            'limit' => 20,
+            'order' => array('Tipoinstit.name' => 'asc')
+        );	
+            
+            $this->Tipoinstit->recursive = 0;
 		$this->set('tipoinstits', $this->paginate());
 	}
 
@@ -24,7 +29,7 @@ class TipoinstitsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function _view($id = null) {
 		$this->Tipoinstit->id = $id;
 		if (!$this->Tipoinstit->exists()) {
 			throw new NotFoundException(__('Invalid tipoinstit'));
@@ -37,7 +42,7 @@ class TipoinstitsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function _add() {
 		if ($this->request->is('post')) {
 			$this->Tipoinstit->create();
 			if ($this->Tipoinstit->save($this->request->data)) {
@@ -56,7 +61,7 @@ class TipoinstitsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function _edit($id = null) {
 		$this->Tipoinstit->id = $id;
 		if (!$this->Tipoinstit->exists()) {
 			throw new NotFoundException(__('Invalid tipoinstit'));
@@ -81,7 +86,7 @@ class TipoinstitsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function _delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}

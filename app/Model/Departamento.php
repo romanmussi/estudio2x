@@ -40,19 +40,6 @@ class Departamento extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Instit' => array(
-			'className' => 'Instit',
-			'foreignKey' => 'departamento_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Localidad' => array(
 			'className' => 'Localidad',
 			'foreignKey' => 'departamento_id',

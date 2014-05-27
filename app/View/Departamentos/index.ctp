@@ -12,10 +12,8 @@
 	<tr>
 		<td><?php echo h($departamento['Departamento']['id']); ?>&nbsp;</td>
 		<td><?php echo h($departamento['Departamento']['name']); ?>&nbsp;</td>
-                <td>
-			<?php echo $this->Html->link($departamento['Jurisdiccion']['name'], array('controller' => 'jurisdicciones', 'action' => 'view', $departamento['Jurisdiccion']['id'])); ?>
-		</td>
-		<td class="actions">
+		<td><?php echo h($departamento['Jurisdiccion']['name']); ?>&nbsp;</td>
+                <td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $departamento['Departamento']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $departamento['Departamento']['id'])); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $departamento['Departamento']['id']), null, __('Are you sure you want to delete # %s?', $departamento['Departamento']['id'])); ?>

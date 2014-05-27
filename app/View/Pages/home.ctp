@@ -9,6 +9,7 @@
 <p><?php echo $this->Html->link('Test de combos relacionados con ajax: alta y edición de Localidades', array('controller' => 'Localidades', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Instituciones', array('controller' => 'instits', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Jurisdicciones', array('controller' => 'jurisdicciones', 'action' => 'index')); ?></p>
+<p><?php echo $this->Html->link('Departamentos', array('controller' => 'departamentos', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Localidades', array('controller' => 'localidades', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Usuarios', array('controller' => 'users', 'action' => 'index')); ?></p>
 <h3>Pruebas de titulos - h3</h3>
