@@ -41,7 +41,7 @@ class InstitsController extends AppController {
      *
      * @return void
      */
-    public function add() {
+    public function _add() {
         if ($this->request->is('post')) {
             $this->Instit->create();
             if ($this->Instit->save($this->request->data)) {
@@ -52,9 +52,9 @@ class InstitsController extends AppController {
             }
         }
         $tipoinstits = $this->Instit->Tipoinstit->find('list');
-        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
         $localidades = $this->Instit->Localidad->find('list');
-        $departamentos = $this->Instit->Departamento->find('list');
+        $departamentos = $this->Instit->Localidad->Departamento->find('list');
+        $jurisdicciones = $this->Instit->Localidad->Departamento->Jurisdiccion->find('list');
         $this->set(compact('tipoinstits', 'jurisdicciones', 'localidades', 'departamentos'));
     }
 
@@ -65,7 +65,7 @@ class InstitsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function _edit($id = null) {
         $this->Instit->id = $id;
         if (!$this->Instit->exists()) {
             throw new NotFoundException(__('Invalid instit'));
@@ -95,7 +95,7 @@ class InstitsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null) {
+    public function _delete($id = null) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }

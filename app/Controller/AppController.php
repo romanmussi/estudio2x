@@ -86,13 +86,13 @@ class AppController extends Controller {
                 'submenus' => array(),
             );
         }
-        if ($this->Acl->check($this->usuario, '/controllers/instits/add')) {
-            $menu['Instituciones']['submenus']['Nueva'] = array(
-                'url' => array('controller' => 'instits', 'action' => 'add'),
-                'esdir' => 0,
-                'submenus' => array(),
-            );
-        }
+//        if ($this->Acl->check($this->usuario, '/controllers/instits/add')) {
+//            $menu['Instituciones']['submenus']['Nueva'] = array(
+//                'url' => array('controller' => 'instits', 'action' => 'add'),
+//                'esdir' => 0,
+//                'submenus' => array(),
+//            );
+//        }
         //Limpiar item dir si queda vacio
         if ($menu['Instituciones']['url'] == '' && $menu['Instituciones']['submenus'] == array()) {
             unset($menu['Instituciones']);
