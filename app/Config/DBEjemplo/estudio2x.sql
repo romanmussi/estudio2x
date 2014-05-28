@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.1.4
 -- Dumped by pg_dump version 9.1.4
--- Started on 2014-04-16 19:09:48
+-- Started on 2014-05-28 14:54:22
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -13,7 +13,7 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- TOC entry 185 (class 3079 OID 11639)
+-- TOC entry 187 (class 3079 OID 11639)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -21,8 +21,8 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 1938 (class 0 OID 0)
--- Dependencies: 185
+-- TOC entry 1946 (class 0 OID 0)
+-- Dependencies: 187
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -32,8 +32,8 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 197 (class 1255 OID 18149)
--- Dependencies: 545 6
+-- TOC entry 199 (class 1255 OID 18823)
+-- Dependencies: 549 6
 -- Name: nombre_instit(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -61,7 +61,7 @@ $$;
 ALTER FUNCTION public.nombre_instit(tipo character varying, nro character varying, nombre character varying) OWNER TO postgres;
 
 --
--- TOC entry 161 (class 1259 OID 18160)
+-- TOC entry 161 (class 1259 OID 18824)
 -- Dependencies: 6
 -- Name: anios_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -77,7 +77,7 @@ CREATE SEQUENCE anios_id_seq
 ALTER TABLE public.anios_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1939 (class 0 OID 0)
+-- TOC entry 1947 (class 0 OID 0)
 -- Dependencies: 161
 -- Name: anios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -86,7 +86,7 @@ SELECT pg_catalog.setval('anios_id_seq', 120178, true);
 
 
 --
--- TOC entry 162 (class 1259 OID 18217)
+-- TOC entry 162 (class 1259 OID 18826)
 -- Dependencies: 6
 -- Name: ciclos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -102,7 +102,7 @@ CREATE SEQUENCE ciclos_id_seq
 ALTER TABLE public.ciclos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1940 (class 0 OID 0)
+-- TOC entry 1948 (class 0 OID 0)
 -- Dependencies: 162
 -- Name: ciclos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -111,7 +111,7 @@ SELECT pg_catalog.setval('ciclos_id_seq', 2013, true);
 
 
 --
--- TOC entry 163 (class 1259 OID 18229)
+-- TOC entry 163 (class 1259 OID 18828)
 -- Dependencies: 6
 -- Name: departamento_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -127,7 +127,7 @@ CREATE SEQUENCE departamento_id_seq
 ALTER TABLE public.departamento_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1941 (class 0 OID 0)
+-- TOC entry 1949 (class 0 OID 0)
 -- Dependencies: 163
 -- Name: departamento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -140,8 +140,8 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 164 (class 1259 OID 18231)
--- Dependencies: 1905 6
+-- TOC entry 164 (class 1259 OID 18830)
+-- Dependencies: 1909 6
 -- Name: departamentos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -155,7 +155,7 @@ CREATE TABLE departamentos (
 ALTER TABLE public.departamentos OWNER TO postgres;
 
 --
--- TOC entry 165 (class 1259 OID 18235)
+-- TOC entry 165 (class 1259 OID 18834)
 -- Dependencies: 6
 -- Name: dependencias_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -171,7 +171,7 @@ CREATE SEQUENCE dependencias_id_seq
 ALTER TABLE public.dependencias_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1942 (class 0 OID 0)
+-- TOC entry 1950 (class 0 OID 0)
 -- Dependencies: 165
 -- Name: dependencias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -180,7 +180,7 @@ SELECT pg_catalog.setval('dependencias_id_seq', 10, false);
 
 
 --
--- TOC entry 166 (class 1259 OID 18258)
+-- TOC entry 166 (class 1259 OID 18836)
 -- Dependencies: 6
 -- Name: etapas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -196,7 +196,7 @@ CREATE SEQUENCE etapas_id_seq
 ALTER TABLE public.etapas_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1943 (class 0 OID 0)
+-- TOC entry 1951 (class 0 OID 0)
 -- Dependencies: 166
 -- Name: etapas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -205,7 +205,7 @@ SELECT pg_catalog.setval('etapas_id_seq', 104, true);
 
 
 --
--- TOC entry 167 (class 1259 OID 18292)
+-- TOC entry 167 (class 1259 OID 18838)
 -- Dependencies: 6
 -- Name: gestiones_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -221,7 +221,7 @@ CREATE SEQUENCE gestiones_id_seq
 ALTER TABLE public.gestiones_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1944 (class 0 OID 0)
+-- TOC entry 1952 (class 0 OID 0)
 -- Dependencies: 167
 -- Name: gestiones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -230,7 +230,55 @@ SELECT pg_catalog.setval('gestiones_id_seq', 4, false);
 
 
 --
--- TOC entry 168 (class 1259 OID 18308)
+-- TOC entry 186 (class 1259 OID 18908)
+-- Dependencies: 6
+-- Name: groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE groups (
+    id integer NOT NULL,
+    name character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.groups OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 18906)
+-- Dependencies: 6 186
+-- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.groups_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1953 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
+
+
+--
+-- TOC entry 1954 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('groups_id_seq', 1, false);
+
+
+--
+-- TOC entry 168 (class 1259 OID 18840)
 -- Dependencies: 6
 -- Name: instits_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -246,7 +294,7 @@ CREATE SEQUENCE instits_id_seq
 ALTER TABLE public.instits_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1945 (class 0 OID 0)
+-- TOC entry 1955 (class 0 OID 0)
 -- Dependencies: 168
 -- Name: instits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -255,8 +303,8 @@ SELECT pg_catalog.setval('instits_id_seq', 5617, true);
 
 
 --
--- TOC entry 169 (class 1259 OID 18310)
--- Dependencies: 1906 1907 1908 1909 1910 6
+-- TOC entry 169 (class 1259 OID 18842)
+-- Dependencies: 1910 1911 1912 1913 1914 6
 -- Name: instits; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -279,7 +327,7 @@ CREATE TABLE instits (
 ALTER TABLE public.instits OWNER TO postgres;
 
 --
--- TOC entry 170 (class 1259 OID 18338)
+-- TOC entry 170 (class 1259 OID 18850)
 -- Dependencies: 6
 -- Name: jurisdicciones_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -295,7 +343,7 @@ CREATE SEQUENCE jurisdicciones_id_seq
 ALTER TABLE public.jurisdicciones_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1946 (class 0 OID 0)
+-- TOC entry 1956 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: jurisdicciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -304,8 +352,8 @@ SELECT pg_catalog.setval('jurisdicciones_id_seq', 100, false);
 
 
 --
--- TOC entry 171 (class 1259 OID 18340)
--- Dependencies: 1911 6
+-- TOC entry 171 (class 1259 OID 18852)
+-- Dependencies: 1915 6
 -- Name: jurisdicciones; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -320,7 +368,7 @@ CREATE TABLE jurisdicciones (
 ALTER TABLE public.jurisdicciones OWNER TO postgres;
 
 --
--- TOC entry 172 (class 1259 OID 18372)
+-- TOC entry 172 (class 1259 OID 18856)
 -- Dependencies: 6
 -- Name: localidades_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -336,7 +384,7 @@ CREATE SEQUENCE localidades_id_seq
 ALTER TABLE public.localidades_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1947 (class 0 OID 0)
+-- TOC entry 1957 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: localidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -345,8 +393,8 @@ SELECT pg_catalog.setval('localidades_id_seq', 1650, true);
 
 
 --
--- TOC entry 173 (class 1259 OID 18374)
--- Dependencies: 1912 6
+-- TOC entry 173 (class 1259 OID 18858)
+-- Dependencies: 1916 6
 -- Name: localidades; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -360,7 +408,7 @@ CREATE TABLE localidades (
 ALTER TABLE public.localidades OWNER TO postgres;
 
 --
--- TOC entry 174 (class 1259 OID 18378)
+-- TOC entry 174 (class 1259 OID 18862)
 -- Dependencies: 6
 -- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -376,7 +424,7 @@ CREATE SEQUENCE logs_id_seq
 ALTER TABLE public.logs_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1948 (class 0 OID 0)
+-- TOC entry 1958 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -385,7 +433,7 @@ SELECT pg_catalog.setval('logs_id_seq', 16368, false);
 
 
 --
--- TOC entry 175 (class 1259 OID 18385)
+-- TOC entry 175 (class 1259 OID 18864)
 -- Dependencies: 6
 -- Name: ofertas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -401,7 +449,7 @@ CREATE SEQUENCE ofertas_id_seq
 ALTER TABLE public.ofertas_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1949 (class 0 OID 0)
+-- TOC entry 1959 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: ofertas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -410,7 +458,7 @@ SELECT pg_catalog.setval('ofertas_id_seq', 8, true);
 
 
 --
--- TOC entry 176 (class 1259 OID 18408)
+-- TOC entry 176 (class 1259 OID 18866)
 -- Dependencies: 6
 -- Name: planes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -426,7 +474,7 @@ CREATE SEQUENCE planes_id_seq
 ALTER TABLE public.planes_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1950 (class 0 OID 0)
+-- TOC entry 1960 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: planes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -435,7 +483,7 @@ SELECT pg_catalog.setval('planes_id_seq', 35281, true);
 
 
 --
--- TOC entry 177 (class 1259 OID 18432)
+-- TOC entry 177 (class 1259 OID 18868)
 -- Dependencies: 6
 -- Name: queries_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -451,7 +499,7 @@ CREATE SEQUENCE queries_id_seq
 ALTER TABLE public.queries_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1951 (class 0 OID 0)
+-- TOC entry 1961 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: queries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -460,7 +508,7 @@ SELECT pg_catalog.setval('queries_id_seq', 86, true);
 
 
 --
--- TOC entry 178 (class 1259 OID 18444)
+-- TOC entry 178 (class 1259 OID 18870)
 -- Dependencies: 6
 -- Name: referentes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -476,7 +524,7 @@ CREATE SEQUENCE referentes_id_seq
 ALTER TABLE public.referentes_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1952 (class 0 OID 0)
+-- TOC entry 1962 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: referentes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -485,7 +533,7 @@ SELECT pg_catalog.setval('referentes_id_seq', 1, false);
 
 
 --
--- TOC entry 179 (class 1259 OID 18450)
+-- TOC entry 179 (class 1259 OID 18872)
 -- Dependencies: 6
 -- Name: sectores_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -501,7 +549,7 @@ CREATE SEQUENCE sectores_id_seq
 ALTER TABLE public.sectores_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1953 (class 0 OID 0)
+-- TOC entry 1963 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: sectores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -510,7 +558,7 @@ SELECT pg_catalog.setval('sectores_id_seq', 41, true);
 
 
 --
--- TOC entry 180 (class 1259 OID 18490)
+-- TOC entry 180 (class 1259 OID 18874)
 -- Dependencies: 6
 -- Name: tipodocs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -526,7 +574,7 @@ CREATE SEQUENCE tipodocs_id_seq
 ALTER TABLE public.tipodocs_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1954 (class 0 OID 0)
+-- TOC entry 1964 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: tipodocs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -535,7 +583,7 @@ SELECT pg_catalog.setval('tipodocs_id_seq', 6, false);
 
 
 --
--- TOC entry 181 (class 1259 OID 18496)
+-- TOC entry 181 (class 1259 OID 18876)
 -- Dependencies: 6
 -- Name: tipoinstits_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -551,7 +599,7 @@ CREATE SEQUENCE tipoinstits_id_seq
 ALTER TABLE public.tipoinstits_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1955 (class 0 OID 0)
+-- TOC entry 1965 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: tipoinstits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -560,8 +608,8 @@ SELECT pg_catalog.setval('tipoinstits_id_seq', 632, true);
 
 
 --
--- TOC entry 182 (class 1259 OID 18498)
--- Dependencies: 1913 6
+-- TOC entry 182 (class 1259 OID 18878)
+-- Dependencies: 1917 6
 -- Name: tipoinstits; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -575,7 +623,7 @@ CREATE TABLE tipoinstits (
 ALTER TABLE public.tipoinstits OWNER TO postgres;
 
 --
--- TOC entry 183 (class 1259 OID 18514)
+-- TOC entry 183 (class 1259 OID 18882)
 -- Dependencies: 6
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -591,7 +639,7 @@ CREATE SEQUENCE users_id_seq
 ALTER TABLE public.users_id_seq OWNER TO postgres;
 
 --
--- TOC entry 1956 (class 0 OID 0)
+-- TOC entry 1966 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -600,8 +648,8 @@ SELECT pg_catalog.setval('users_id_seq', 244, true);
 
 
 --
--- TOC entry 184 (class 1259 OID 18516)
--- Dependencies: 1914 6
+-- TOC entry 184 (class 1259 OID 18884)
+-- Dependencies: 1918 6
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -620,7 +668,16 @@ CREATE TABLE users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 1927 (class 0 OID 18231)
+-- TOC entry 1919 (class 2604 OID 18911)
+-- Dependencies: 185 186 186
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
+
+
+--
+-- TOC entry 1934 (class 0 OID 18830)
 -- Dependencies: 164
 -- Data for Name: departamentos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -689,7 +746,20 @@ COPY departamentos (id, jurisdiccion_id, name) FROM stdin;
 
 
 --
--- TOC entry 1928 (class 0 OID 18310)
+-- TOC entry 1940 (class 0 OID 18908)
+-- Dependencies: 186
+-- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY groups (id, name) FROM stdin;
+1	Invitado
+2	Editor
+3	Administrador
+\.
+
+
+--
+-- TOC entry 1935 (class 0 OID 18842)
 -- Dependencies: 169
 -- Data for Name: instits; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1209,7 +1279,7 @@ COPY instits (id, tipoinstit_id, cue, anexo, nombre, nroinstit, direccion, cp, a
 
 
 --
--- TOC entry 1929 (class 0 OID 18340)
+-- TOC entry 1936 (class 0 OID 18852)
 -- Dependencies: 171
 -- Data for Name: jurisdicciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1243,7 +1313,7 @@ COPY jurisdicciones (id, name, modified, created) FROM stdin;
 
 
 --
--- TOC entry 1930 (class 0 OID 18374)
+-- TOC entry 1937 (class 0 OID 18858)
 -- Dependencies: 173
 -- Data for Name: localidades; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1414,7 +1484,7 @@ COPY localidades (id, departamento_id, name) FROM stdin;
 
 
 --
--- TOC entry 1931 (class 0 OID 18498)
+-- TOC entry 1938 (class 0 OID 18878)
 -- Dependencies: 182
 -- Data for Name: tipoinstits; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1489,7 +1559,7 @@ COPY tipoinstits (id, jurisdiccion_id, name) FROM stdin;
 
 
 --
--- TOC entry 1932 (class 0 OID 18516)
+-- TOC entry 1939 (class 0 OID 18884)
 -- Dependencies: 184
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1501,7 +1571,7 @@ COPY users (id, username, nombre, apellido, password, created, modified, group_i
 
 
 --
--- TOC entry 1916 (class 2606 OID 18635)
+-- TOC entry 1921 (class 2606 OID 18889)
 -- Dependencies: 164 164
 -- Name: departamento_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -1511,7 +1581,17 @@ ALTER TABLE ONLY departamentos
 
 
 --
--- TOC entry 1918 (class 2606 OID 18657)
+-- TOC entry 1933 (class 2606 OID 18913)
+-- Dependencies: 186 186
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1923 (class 2606 OID 18891)
 -- Dependencies: 169 169
 -- Name: instits_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -1521,7 +1601,7 @@ ALTER TABLE ONLY instits
 
 
 --
--- TOC entry 1920 (class 2606 OID 18661)
+-- TOC entry 1925 (class 2606 OID 18893)
 -- Dependencies: 171 171
 -- Name: jurisdicciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -1531,7 +1611,7 @@ ALTER TABLE ONLY jurisdicciones
 
 
 --
--- TOC entry 1922 (class 2606 OID 18665)
+-- TOC entry 1927 (class 2606 OID 18895)
 -- Dependencies: 173 173
 -- Name: localidades_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -1541,7 +1621,7 @@ ALTER TABLE ONLY localidades
 
 
 --
--- TOC entry 1924 (class 2606 OID 18693)
+-- TOC entry 1929 (class 2606 OID 18897)
 -- Dependencies: 182 182
 -- Name: tipoinstits_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -1551,7 +1631,7 @@ ALTER TABLE ONLY tipoinstits
 
 
 --
--- TOC entry 1926 (class 2606 OID 18699)
+-- TOC entry 1931 (class 2606 OID 18899)
 -- Dependencies: 184 184
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -1561,7 +1641,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 1937 (class 0 OID 0)
+-- TOC entry 1945 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -1572,7 +1652,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-04-16 19:09:50
+-- Completed on 2014-05-28 14:54:27
 
 --
 -- PostgreSQL database dump complete

@@ -11,6 +11,7 @@
 <p><?php echo $this->Html->link('Jurisdicciones', array('controller' => 'jurisdicciones', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Departamentos', array('controller' => 'departamentos', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Localidades', array('controller' => 'localidades', 'action' => 'index')); ?></p>
+<p><?php echo $this->Html->link('Grupos', array('controller' => 'groups', 'action' => 'index')); ?></p>
 <p><?php echo $this->Html->link('Usuarios', array('controller' => 'users', 'action' => 'index')); ?></p>
 <h3>Pruebas de titulos - h3</h3>
 <h4>Pruebas de titulos - h4</h4>

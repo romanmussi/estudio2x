@@ -11,9 +11,9 @@
 			<?php echo h($user['User']['username']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Group_id'); ?></dt>
+		<dt><?php echo __('Group'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['group_id']); ?>
+			<?php echo h($user['Group']['name']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Nombre'); ?></dt>
@@ -29,46 +29,6 @@
 		<dt><?php echo __('Password'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['password']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Mail'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['mail']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Oficina'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['oficina']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Interno'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['interno']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Role'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['role']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Jurisdiccion Id'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['jurisdiccion_id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Created'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['modified']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Password Reset Token'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['password_reset_token']); ?>
 			&nbsp;
 		</dd>
 	</dl>

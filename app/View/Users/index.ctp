@@ -6,6 +6,7 @@
             <th><?php echo $this->Paginator->sort('username'); ?></th>
             <th><?php echo $this->Paginator->sort('nombre'); ?></th>
             <th><?php echo $this->Paginator->sort('apellido'); ?></th>
+            <th><?php echo $this->Paginator->sort('group_id'); ?></th>
             <th class="actions"><?php echo __('Actions'); ?></th>
         </tr>
 	<?php
@@ -15,6 +16,7 @@
             <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
             <td><?php echo h($user['User']['nombre']); ?>&nbsp;</td>
             <td><?php echo h($user['User']['apellido']); ?>&nbsp;</td>
+            <td><?php echo h($user['Group']['name']); ?>&nbsp;</td>
             <td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>

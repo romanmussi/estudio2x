@@ -16,6 +16,22 @@ class User extends AppModel {
      */
     public $displayField = 'username';
 
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Group' => array(
+			'className' => 'Group',
+			'foreignKey' => 'group_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+ 
+    
 //    public function beforeSave() {
 //        $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
 //        return true;
